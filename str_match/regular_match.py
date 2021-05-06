@@ -9,7 +9,7 @@ def match(s, w):
     wi = 0
     delta = 0
     while si + delta < n:
-        if wi < len(w_str):
+        if wi < m:
             if s_str[si + delta] == w_str[wi]:
                 wi += 1
                 if wi == m:
