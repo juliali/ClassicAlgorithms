@@ -28,9 +28,7 @@ def generate_pmt(w):
     return pmt
 
 
-def kmp_match(s, w):
-    pmt = generate_pmt(w)
-    print(pmt)
+def kmp_match(s, w, pmt):
     s_str = list(s)
     w_str = list(w)
 
@@ -41,7 +39,6 @@ def kmp_match(s, w):
     wi = 0
     delta = 0
     while si + delta < n:
-        #print("si:", si, "delta:", delta, "wi:", wi)
         if wi < m:
             if s_str[si + delta] == w_str[wi]:
                 wi += 1
@@ -62,12 +59,14 @@ def kmp_match(s, w):
     print(s, w, "no match")
     return
 
-kmp_match("ababababcdcdcd", "abababc")
 
-#kmp_match('ababababca', 'ca')
-#kmp_match('ababababca', 'bc')
+def do_match(s, w):
+    pmt = generate_pmt(w)
+    kmp_match(s, w, pmt)
+    return
 
-#kmp_match("ababcd", "abcd")
-#kmp_match("ababcd", "cc")
-#kmp_match("ababababcd", "ababc")
-#kmp_match("There is a dog on the ground.", "ground")
+do_match("ababababcdcdcd", "abababc")
+do_match('ababababcdcdcd', "cd")
+do_match('ababababcdcdcd', "bc")
+do_match("ababcd", "cc")
+do_match("There is a dog on the ground.", "ground")
