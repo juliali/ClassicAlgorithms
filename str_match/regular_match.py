@@ -1,16 +1,21 @@
 def match(s, w):
-    s_str = list(s)
-    w_str = list(w)
+    if not s or not w:
+        print("Input is invalid!")
+        return -1
 
-    n = len(s_str)
-    m = len(w_str)
+    n = len(s)
+    m = len(w)
+
+    if m > n:
+        print("The word cannot be longer than the s str.")
+        return -1
 
     si = 0
     wi = 0
     delta = 0
     while si + delta < n:
         if wi < m:
-            if s_str[si + delta] == w_str[wi]:
+            if s[si + delta] == w[wi]:
                 wi += 1
                 if wi == m:
                     print(s, w, "matched at:", si)
@@ -26,6 +31,9 @@ def match(s, w):
     return -1
 
 
+match('aaa', 'aaaaa')
+match('aaa', '')
+match('', 'a')
 match('ababababca', 'ca')
 match('ababababca', 'bc')
 match("ababcd", "abcd")

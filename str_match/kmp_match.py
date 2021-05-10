@@ -15,6 +15,9 @@ def calculate_pm_value(str):
 
 
 def generate_pmt(w):
+    if not w:
+        return None
+
     m = w.__len__()
 
     pmt = [list(w), list(range(m)), list(range(m))]
@@ -29,18 +32,28 @@ def generate_pmt(w):
 
 
 def kmp_match(s, w, pmt):
-    s_str = list(s)
-    w_str = list(w)
 
-    n = len(s_str)
-    m = len(w_str)
+    if pmt is None:
+        print("The word is empty. No PMT generated!")
+        return -1
+
+    if not s:
+        print("Input s str is invalid!")
+        return -1
+
+    n = len(s)
+    m = len(w)
+
+    if m > n:
+        print("The word cannot be longer than the s str.")
+        return -1
 
     si = 0
     wi = 0
     delta = 0
     while si + delta < n:
         if wi < m:
-            if s_str[si + delta] == w_str[wi]:
+            if s[si + delta] == w[wi]:
                 wi += 1
                 if wi == m:
                     print(s, w, "matched at:", si)
@@ -65,6 +78,10 @@ def do_match(s, w):
     kmp_match(s, w, pmt)
     return
 
+
+do_match('aaa', 'aaaaa')
+do_match('aaa', '')
+do_match('', 'a')
 do_match("ababababcdcdcd", "abababc")
 do_match('ababababcdcdcd', "cd")
 do_match('ababababcdcdcd', "bc")
