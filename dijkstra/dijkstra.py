@@ -44,6 +44,7 @@ def dijkstra(adj_matrix, start_index):
         v = Vertex(string.ascii_uppercase[i], i, sys.maxsize)
 
         if i == start_index:
+            print("Start:", v.get_name())
             v.set_distance(0)
             s_set.append(v)
         else:
@@ -88,12 +89,14 @@ def dijkstra(adj_matrix, start_index):
     return
 
 
-def process_file(file_name):
+def process_file(file_name, index):
+    print("\nProcessing:", file_name)
     script_dir = os.path.dirname(__file__)
     file_path = os.path.join(script_dir, file_name)
     data = list(csv.reader(open(file_path)))
-    dijkstra(data, 3)
+    dijkstra(data, index)
     return
 
 
-process_file("d_data_1.csv")
+process_file("d_data_1.csv", 3)
+process_file("d_data_2.csv", 0)
