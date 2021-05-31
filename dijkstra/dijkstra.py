@@ -34,7 +34,6 @@ class Vertex:
 
 def dijkstra(adj_matrix, start_index):
     n = len(adj_matrix)
-    v_list = []
 
     s_set = []
     u_set = []
@@ -52,8 +51,6 @@ def dijkstra(adj_matrix, start_index):
             if distance_to_start > 0:
                 v.set_shortest_distance(distance_to_start)
             u_set.append(v)
-
-        v_list.append(v)
 
     while len(s_set) < n:
         u_set.sort(key=lambda x: x.shortest_distance, reverse=False)
