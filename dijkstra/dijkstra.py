@@ -7,12 +7,12 @@ import string
 class Vertex:
     name = None
     index = -1
-    distance = sys.maxsize
+    shortest_distance = sys.maxsize
 
     def __init__(self, name, index, distance):
         self.name = name
         self.index = index
-        self.distance = distance
+        self.shortest_distance = distance
         return
 
     def get_name(self):
@@ -21,15 +21,15 @@ class Vertex:
     def get_index(self):
         return self.index
 
-    def get_distance(self):
-        return self.distance
+    def get_shortest_distance(self):
+        return self.shortest_distance
 
-    def set_distance(self, new_distance):
-        self.distance = new_distance
+    def set_shortest_distance(self, new_distance):
+        self.shortest_distance = new_distance
         return
 
     def print(self):
-        print("name:", self.name, ", distance:", self.distance)
+        print("name:", self.name, ", distance:", self.shortest_distance)
 
 
 def dijkstra(adj_matrix, start_index):
@@ -45,18 +45,18 @@ def dijkstra(adj_matrix, start_index):
 
         if i == start_index:
             print("Start:", v.get_name())
-            v.set_distance(0)
+            v.set_shortest_distance(0)
             s_set.append(v)
         else:
             distance_to_start = int(adj_matrix[i][start_index])
             if distance_to_start > 0:
-                v.set_distance(distance_to_start)
+                v.set_shortest_distance(distance_to_start)
             u_set.append(v)
 
         v_list.append(v)
 
     while len(s_set) < n:
-        u_set.sort(key=lambda x: x.distance, reverse=False)
+        u_set.sort(key=lambda x: x.shortest_distance, reverse=False)
 
         nearest_v = u_set[0]
 
@@ -65,11 +65,11 @@ def dijkstra(adj_matrix, start_index):
 
         for uv in u_set:
             uv_index = uv.get_index()
-            current_distance = uv.get_distance()
+            current_distance = uv.get_shortest_distance()
 
             for sv in s_set:
                 sv_index = sv.get_index()
-                sv_distance = sv.get_distance()
+                sv_distance = sv.get_shortest_distance()
 
                 new_distance = int(adj_matrix[sv_index][uv_index])
 
@@ -81,7 +81,7 @@ def dijkstra(adj_matrix, start_index):
                 if new_distance < current_distance:
                     current_distance = new_distance
 
-            uv.set_distance(current_distance)
+            uv.set_shortest_distance(current_distance)
 
     for v in s_set:
         v.print()
