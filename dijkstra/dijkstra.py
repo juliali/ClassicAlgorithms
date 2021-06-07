@@ -64,21 +64,20 @@ def dijkstra(adj_matrix, start_index):
             uv_index = uv.get_index()
             current_distance = uv.get_shortest_distance()
 
-            for sv in s_set:
-                sv_index = sv.get_index()
-                sv_distance = sv.get_shortest_distance()
+            nearest_index = nearest_v.get_index()
 
-                new_distance = int(adj_matrix[sv_index][uv_index])
+            if int(adj_matrix[nearest_index][uv_index]) > 0:
+                new_distance = int(adj_matrix[nearest_index][uv_index])
 
                 if new_distance < 0:
                     new_distance = sys.maxsize
                 else:
-                    new_distance += sv_distance
+                    new_distance += nearest_v.get_shortest_distance()
 
                 if new_distance < current_distance:
                     current_distance = new_distance
 
-            uv.set_shortest_distance(current_distance)
+                uv.set_shortest_distance(current_distance)
 
     for v in s_set:
         v.print()
